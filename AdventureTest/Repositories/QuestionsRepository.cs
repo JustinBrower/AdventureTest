@@ -1,4 +1,3 @@
-
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -25,6 +24,17 @@ namespace AdventureTest.Repositories
             ";
             return _db.Query<Question>(sql).ToList();
 
+        }
+
+        internal List<Question> GetQuestionsByTeacher(string name)
+        {
+            string sql = @"
+            SELECT
+            *
+            FROM questions
+            WHERE teacher = @name;
+            ";
+            return _db.Query<Question>(sql, new { name }).ToList();
         }
     }
 }

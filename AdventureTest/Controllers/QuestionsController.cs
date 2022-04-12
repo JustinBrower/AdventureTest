@@ -30,5 +30,18 @@ namespace AdventureTest.Controllers
                 return BadRequest(e.Message);
             }
         }
+        [HttpGet("{name}")]
+        public ActionResult<List<Question>> GetQuestionsByTeacher(string name)
+        {
+            try
+            {
+                List<Question> questions = _qs.GetQuestionsByTeacher(name);
+                return Ok(questions);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
     }
 }

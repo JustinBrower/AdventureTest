@@ -8,7 +8,36 @@ CREATE TABLE IF NOT EXISTS accounts(
 ) default charset utf8 COMMENT '';
 CREATE TABLE IF NOT EXISTS questions(
   id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  body varchar(255),
+  body varchar(1000),
   answer varchar(255),
   teacher VARCHAR(255)
 ) default charset utf8 COMMENT '';
+CREATE TABLE IF NOT EXISTS teachers(
+  id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  name varchar(255),
+  picture TEXT
+) default charset utf8 COMMENT '';
+CREATE TABLE IF NOT EXISTS phrases(
+  id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  body varchar(255),
+  teacher VARCHAR(255)
+) default charset utf8 COMMENT '';
+INSERT INTO
+  questions (body, answer, teacher)
+VALUES
+  (
+    'What color is the sky?',
+    'Blue, probably',
+    "jeremy"
+  );
+INSERT INTO
+  teachers (name, picture)
+VALUES
+  (
+    'jeremy',
+    'https://thiscatdoesnotexist.com'
+  );
+INSERT INTO
+  phrases (body, teacher)
+VALUES
+  ('Please adopt my cats', 'jeremy');

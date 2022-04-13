@@ -7,12 +7,14 @@
     </div>
     <div class="row justify-content-center">
       <div class="col-8 d-flex justify-content-center pt-5">
-        <button
-          style="width: 50vh; height: 8vh"
-          class="btn btn-dark rounded-pill hoverable"
-        >
-          <h1>New Game</h1>
-        </button>
+        <router-link :to="{ name: 'Game' }">
+          <button
+            style="width: 50vh; height: 8vh"
+            class="btn btn-dark rounded-pill hoverable"
+          >
+            <h1>New Game</h1>
+          </button>
+        </router-link>
       </div>
     </div>
     <div class="row justify-content-center">
@@ -29,8 +31,14 @@
 </template>
 
 <script>
+import { logger } from '../utils/Logger'
+import Pop from '../utils/Pop'
 export default {
-  name: 'Home'
+  name: 'Home',
+  setup() {
+    return {
+    }
+  }
 }
 </script>
 

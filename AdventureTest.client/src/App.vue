@@ -4,24 +4,26 @@
   </header>
   <main>
     <router-view />
+    <!-- FIXME GET MUSIC TO WORK -->
+    <!-- <div class="d-flex align-items-end justify-content-start">
+      <div
+        v-if="music"
+        class="mdi mdi-volume-high mdi-48px hoverable"
+        @click="flip"
+      ></div>
+      <div
+        v-if="!music"
+        class="mdi mdi-volume-off mdi-48px hoverable"
+        @click="flip"
+      ></div>
+      <audio autoplay :muted="!music" preload="auto">
+        <source src="src/assets/music/Hammerwatch.mp3" />
+      </audio>
+    </div> -->
   </main>
   <footer>
-    <!-- FIXME GET MUSIC TO WORK -->
-    <div
-      v-if="music"
-      class="mdi mdi-volume-high mdi-48px hoverable"
-      @click="flip"
-    ></div>
-    <div
-      v-if="!music"
-      class="mdi mdi-volume-off mdi-48px hoverable"
-      @click="flip"
-    ></div>
-    <audio autoplay :muted="!music" preload="auto">
-      <source src="src/assets/music/Hammerwatch.mp3" />
-    </audio>
-    <div class="bg-dark text-light text-center p-4">
-      Made with 💖 by A CodeWorks Student
+    <div class="bg-dark text-light text-center p-3">
+      Made with 💖 by a CodeWorks Student
     </div>
   </footer>
 </template>

@@ -6,34 +6,34 @@ using Dapper;
 
 namespace AdventureTest.Repositories
 {
-    public class QuestionsRepository
+    public class PhrasesRepository
     {
-        private IDbConnection _db;
+        private readonly IDbConnection _db;
 
-        public QuestionsRepository(IDbConnection db)
+        public PhrasesRepository(IDbConnection db)
         {
             _db = db;
         }
 
-        internal List<Question> GetAllQuestions()
+        internal List<Phrase> GetAllPhrases()
         {
             string sql = @"
             SELECT
             *
-            FROM questions
+            FROM phrases
             ";
-            return _db.Query<Question>(sql).ToList();
+            return _db.Query<Phrase>(sql).ToList();
         }
 
-        internal List<Question> GetQuestionsByTeacher(string name)
+        internal List<Phrase> GetPhrasesByTeacher(string name)
         {
             string sql = @"
             SELECT
             *
-            FROM questions
+            FROM phrases
             WHERE teacher = @name;
             ";
-            return _db.Query<Question>(sql, new { name }).ToList();
+            return _db.Query<Phrase>(sql, new { name }).ToList();
         }
     }
 }

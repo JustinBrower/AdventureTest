@@ -8,23 +8,23 @@ namespace AdventureTest.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class TeachersController : ControllerBase
-    {
-        private readonly TeachersService _ts;
 
-        public TeachersController(TeachersService ts)
+    public class PhrasesController : ControllerBase
+    {
+        private readonly PhrasesService _ps;
+
+        public PhrasesController(PhrasesService ps)
         {
-            _ts = ts;
+            _ps = ps;
         }
 
         [HttpGet]
-
-        public ActionResult<List<Teacher>> GetAllTeachers()
+        public ActionResult<List<Phrase>> GetAllPhrases()
         {
             try
             {
-                List<Teacher> teachers = _ts.GetAllTeachers();
-                return Ok(teachers);
+                List<Phrase> phrases = _ps.GetAllPhrases();
+                return Ok(phrases);
             }
             catch (Exception e)
             {
@@ -33,12 +33,12 @@ namespace AdventureTest.Controllers
         }
 
         [HttpGet("{name}")]
-        public ActionResult<Teacher> GetTeacherByName(string name)
+        public ActionResult<List<Phrase>> GetPhrasesByTeacher(string name)
         {
             try
             {
-                Teacher teacher = _ts.GetTeacherByName(name);
-                return Ok(teacher);
+                List<Phrase> phrases = _ps.GetPhrasesByTeacher(name);
+                return Ok(phrases);
             }
             catch (Exception e)
             {
@@ -46,5 +46,4 @@ namespace AdventureTest.Controllers
             }
         }
     }
-
 }

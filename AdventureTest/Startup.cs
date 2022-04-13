@@ -36,9 +36,12 @@ namespace AdventureTest
             services.AddScoped<AccountsRepository>();
             services.AddScoped<AccountService>();
             services.AddTransient<QuestionsRepository>();
+            services.AddTransient<TeachersRepository>();
+            services.AddTransient<PhrasesRepository>();
             services.AddTransient<QuestionsService>();
+            services.AddTransient<TeachersService>();
+            services.AddTransient<PhrasesService>();
         }
-
         private void ConfigureCors(IServiceCollection services)
         {
             services.AddCors(options =>

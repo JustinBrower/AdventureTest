@@ -9,6 +9,42 @@
     </div>
     <div class="top-right console p-2">
       <strong class="wrap" id="text"></strong>
+
+      <strong id="answers" class="hidden">
+        <p
+          :class="{ green: activeAnswer === 'a' }"
+          @click="setActive('a')"
+          class="hoverable mt-5"
+          id="a"
+        >
+          A. {{ answers[0] }}
+        </p>
+        <p
+          :class="{ green: activeAnswer === 'b' }"
+          @click="setActive('b')"
+          class="hoverable"
+          id="b"
+        >
+          B. {{ answers[1] }}
+        </p>
+        <p
+          :class="{ green: activeAnswer === 'c' }"
+          @click="setActive('c')"
+          class="hoverable"
+          id="c"
+        >
+          C. {{ answers[2] }}
+        </p>
+        <p
+          :class="{ green: activeAnswer === 'd' }"
+          @click="setActive('d')"
+          class="hoverable"
+          id="d"
+        >
+          D. {{ answers[3] }}
+        </p>
+      </strong>
+
       <button
         class="btn btn-info hidden bottom-right"
         id="next"
@@ -16,10 +52,28 @@
       >
         Next
       </button>
+      <button
+        class="btn btn-success hidden bottom-right"
+        id="nextQuestion"
+        @click="sendQuestion"
+      >
+        Next
+      </button>
+      <button
+        class="btn btn-success hidden bottom-right"
+        id="submit"
+        @click="submitAnswer"
+      >
+        Submit
+      </button>
+      <button
+        class="btn btn-warning hidden bottom-right-reset"
+        id="reset"
+        @click="reset"
+      >
+        Reset Console
+      </button>
     </div>
-    <!-- <button class="btn btn-info" @click="sendGreeting()">
-      Test
-    </button> -->
   </div>
 </template>
 
@@ -31,22 +85,107 @@ import { elementsService } from "../services/ElementsService"
 import { Dialogue } from "../TextDump"
 import { onMounted, watchEffect } from '@vue/runtime-core'
 import { logger } from '../utils/Logger'
+import Pop from '../utils/Pop'
 export default {
   setup() {
-    let i = 1
+    // ORDER OF THE INTRO DIALOGUE
+    let introOrder = 0
+    // STATE OF THE GAME
+    let state = 0
+    // QUESTION ORDER
+    let q = 0
     onMounted(() => {
-      elementsService.displayText(Dialogue.greeting[0], 40)
+      try {
+        document.getElementById('next').classList.remove('hidden')
+        elementsService.displayText(Dialogue.messages.intro[introOrder], 40)
+        introOrder++
+        elementsService.collectAnswers(Dialogue.messages[state].wrongAnswer[q], Dialogue.messages[q].correctAnswer[q])
+      } catch (error) {
+        logger.error(error)
+        Pop.toast(error.message, 'error')
+      }
+    })
+    watchEffect(() => {
+      AppState.game
+      AppState.activeAnswer
     })
     return {
-      i,
+      introOrder,
+      state,
+      q,
       sendGreeting() {
-        if (this.greeting[i]) {
-          elementsService.displayText(this.greeting[i], 40)
-          i++
-        } else {
+        try {
+          if (this.greeting[introOrder]) {
+            elementsService.displayText(this.greeting[introOrder], 40)
+          }
+          introOrder++
+          if (introOrder == 4) {
+            document.getElementById('nextQuestion').classList.remove('hidden')
+            document.getElementById('next').classList.add('hidden')
+          }
+        } catch (error) {
+          logger.error(error)
+          Pop.toast(error.message, 'error')
         }
       },
-      greeting: computed(() => Dialogue.greeting)
+      sendQuestion() {
+        try {
+          if (this.message[state].question[q]) {
+            AppState.game = 1
+            document.getElementById('nextQuestion').classList.add('hidden')
+            elementsService.displayText(this.message[state].question[q], 50)
+          }
+        } catch (error) {
+          logger.error(error)
+          Pop.toast(error.message, 'error')
+        }
+      },
+      setActive(answer) {
+        try {
+          elementsService.setActive(answer)
+        } catch (error) {
+          logger.error(error)
+          Pop.toast(error.message, 'error')
+        }
+      },
+      submitAnswer() {
+        try {
+          if (AppState.activeAnswer) {
+            elementsService.checkAnswer()
+            q++
+          } else {
+            document.getElementById('text').innerText += "Please select an answer."
+          }
+        } catch (error) {
+          logger.error(error)
+          Pop.toast(error.message, 'error')
+        }
+      },
+      collectAnswers() {
+        try {
+          elementsService.collectAnswers(this.message[state].wrongAnswer[q], this.message[state].correctAnswer[q])
+        } catch (error) {
+          logger.error(error)
+          Pop.toast(error.message, 'error')
+        }
+      },
+      reset() {
+        try {
+          document.getElementById('answers').classList.add('hidden')
+          document.getElementById('submit').classList.add('hidden')
+          elementsService.displayText(this.message[state].question[q], 50)
+        } catch (error) {
+          logger.error(error)
+          Pop.toast(error.message, 'error')
+        }
+      },
+
+
+      greeting: computed(() => Dialogue.messages.intro),
+      message: computed(() => Dialogue.messages),
+      state: computed(() => AppState.state),
+      activeAnswer: computed(() => AppState.activeAnswer),
+      answers: computed(() => AppState.answers)
     }
   }
 }
@@ -71,6 +210,11 @@ export default {
   bottom: 20px;
   right: 10px;
 }
+.bottom-right-reset {
+  position: absolute;
+  bottom: 20px;
+  right: 238px;
+}
 .console {
   height: 86.4vh;
   background-color: rgb(207, 120, 120);
@@ -84,5 +228,11 @@ export default {
 }
 .hidden {
   display: none;
+}
+.hoverable:hover {
+  cursor: pointer;
+}
+.green {
+  color: green;
 }
 </style>

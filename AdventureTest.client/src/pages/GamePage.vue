@@ -9,7 +9,17 @@
     </div>
     <div class="top-right console p-2">
       <strong class="wrap" id="text"></strong>
+      <button
+        class="btn btn-info hidden bottom-right"
+        id="next"
+        @click="sendGreeting"
+      >
+        Next
+      </button>
     </div>
+    <!-- <button class="btn btn-info" @click="sendGreeting()">
+      Test
+    </button> -->
   </div>
 </template>
 
@@ -20,12 +30,23 @@ import { AppState } from '../AppState'
 import { elementsService } from "../services/ElementsService"
 import { Dialogue } from "../TextDump"
 import { onMounted, watchEffect } from '@vue/runtime-core'
+import { logger } from '../utils/Logger'
 export default {
   setup() {
+    let i = 1
     onMounted(() => {
-      elementsService.displayText(Dialogue.greeting, 50)
+      elementsService.displayText(Dialogue.greeting[0], 40)
     })
     return {
+      i,
+      sendGreeting() {
+        if (this.greeting[i]) {
+          elementsService.displayText(this.greeting[i], 40)
+          i++
+        } else {
+        }
+      },
+      greeting: computed(() => Dialogue.greeting)
     }
   }
 }
@@ -45,6 +66,11 @@ export default {
   top: 71px;
   right: 0.1px;
 }
+.bottom-right {
+  position: absolute;
+  bottom: 20px;
+  right: 10px;
+}
 .console {
   height: 86.4vh;
   background-color: rgb(207, 120, 120);
@@ -55,5 +81,8 @@ export default {
   white-space: normal;
   word-break: break-all;
   overflow-wrap: break-word;
+}
+.hidden {
+  display: none;
 }
 </style>

@@ -43,6 +43,7 @@ class ElementsService {
     }
 
     checkAnswer() {
+        logger.log("correct answer...", AppState.correctAnswer, "your answer...", AppState.activeAnswer)
         if (AppState.correctAnswer == AppState.activeAnswer) {
             this.displayText("Correct! But what about this...", 70, 0)
         } else {

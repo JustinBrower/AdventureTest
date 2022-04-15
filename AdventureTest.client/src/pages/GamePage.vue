@@ -12,23 +12,23 @@
 
       <strong id="answers" class="hidden">
         <p
-          :class="{ green: activeAnswer === 'a' }"
-          @click="setActive('a')"
+          :class="{ green: activeAnswer === 0 }"
+          @click="setActive(0)"
           class="hoverable mt-5"
           id="a"
         >
           A. {{ answers[0] }}
         </p>
         <p
-          :class="{ green: activeAnswer === 'b' }"
-          @click="setActive('b')"
+          :class="{ green: activeAnswer === 1 }"
+          @click="setActive(1)"
           class="hoverable"
           id="b"
         >
           B. {{ answers[1] }}
         </p>
         <p
-          :class="{ green: activeAnswer === 'c' }"
+          :class="{ green: activeAnswer === 2 }"
           @click="setActive('c')"
           class="hoverable"
           id="c"
@@ -36,7 +36,7 @@
           C. {{ answers[2] }}
         </p>
         <p
-          :class="{ green: activeAnswer === 'd' }"
+          :class="{ green: activeAnswer === 3 }"
           @click="setActive('d')"
           class="hoverable"
           id="d"

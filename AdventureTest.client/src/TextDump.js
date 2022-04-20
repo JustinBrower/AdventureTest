@@ -39,20 +39,41 @@ export const Dialogue = reactive({
             correctAnswer: {
 
                 0: "<h1>",
-                1: "<h7>",
+                1: "<h6>",
                 2: "Hyper-Text-Markup-Language"
             }
         },
         1: {
             question:
                 [
-
+                    "What exactly does CSS stand for?",
+                    "What tag do you use for in-line styling?",
+                    "What selector is used when selecting ALL elements?"
                 ],
-            answer:
-                [
-
+            wrongAnswer:
+            {
+                0: [
+                    "Cats-Can't-Speak",
+                    "Closed-Select-Styling",
+                    "C-Stack-Synergy"
+                ],
+                1: [
+                    "CSS",
+                    "Change",
+                    "Element"
+                ],
+                2: [
+                    "#",
+                    ".",
+                    "^"
                 ]
-        }
+            },
+            correctAnswer: {
+                0: "Cascading-Style-Sheets",
+                1: "Style",
+                2: "*"
+            }
+        },
     }
 })
 

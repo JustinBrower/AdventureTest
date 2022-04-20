@@ -29,7 +29,7 @@
         </p>
         <p
           :class="{ green: activeAnswer === 2 }"
-          @click="setActive('c')"
+          @click="setActive(2)"
           class="hoverable"
           id="c"
         >
@@ -37,7 +37,7 @@
         </p>
         <p
           :class="{ green: activeAnswer === 3 }"
-          @click="setActive('d')"
+          @click="setActive(3)"
           class="hoverable"
           id="d"
         >
@@ -98,7 +98,6 @@ export default {
       try {
         document.getElementById('next').classList.remove('hidden')
         elementsService.displayText(Dialogue.messages.intro[introOrder], 40)
-        introOrder++
         elementsService.collectAnswers(Dialogue.messages[state].wrongAnswer[q], Dialogue.messages[q].correctAnswer[q])
       } catch (error) {
         logger.error(error)
@@ -115,11 +114,11 @@ export default {
       q,
       sendGreeting() {
         try {
+          introOrder++
           if (this.greeting[introOrder]) {
             elementsService.displayText(this.greeting[introOrder], 40)
           }
-          introOrder++
-          if (introOrder == 4) {
+          if (introOrder == 2) {
             document.getElementById('nextQuestion').classList.remove('hidden')
             document.getElementById('next').classList.add('hidden')
           }
@@ -131,9 +130,14 @@ export default {
       sendQuestion() {
         try {
           if (this.message[state].question[q]) {
-            AppState.game = 1
+            this.collectAnswers()
+            logger.log(this.message[state].question[q])
             document.getElementById('nextQuestion').classList.add('hidden')
-            elementsService.displayText(this.message[state].question[q], 50)
+            elementsService.displayQuestion(this.message[state].question[q], 50)
+          } else {
+            state++
+            q = 0
+            this.sendQuestion()
           }
         } catch (error) {
           logger.error(error)
@@ -142,7 +146,8 @@ export default {
       },
       setActive(answer) {
         try {
-          elementsService.setActive(answer)
+          AppState.activeAnswer = answer
+          logger.log(this.activeAnswer)
         } catch (error) {
           logger.error(error)
           Pop.toast(error.message, 'error')
@@ -150,7 +155,7 @@ export default {
       },
       submitAnswer() {
         try {
-          if (AppState.activeAnswer) {
+          if (this.activeAnswer != undefined) {
             elementsService.checkAnswer()
             q++
           } else {
@@ -163,7 +168,11 @@ export default {
       },
       collectAnswers() {
         try {
-          elementsService.collectAnswers(this.message[state].wrongAnswer[q], this.message[state].correctAnswer[q])
+          if (this.message[state].wrongAnswer[q]) {
+            elementsService.collectAnswers(this.message[state].wrongAnswer[q], this.message[state].correctAnswer[q])
+          } else {
+            logger.log("Done with state one")
+          }
         } catch (error) {
           logger.error(error)
           Pop.toast(error.message, 'error')
@@ -183,7 +192,6 @@ export default {
 
       greeting: computed(() => Dialogue.messages.intro),
       message: computed(() => Dialogue.messages),
-      state: computed(() => AppState.state),
       activeAnswer: computed(() => AppState.activeAnswer),
       answers: computed(() => AppState.answers)
     }

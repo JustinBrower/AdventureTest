@@ -74,6 +74,37 @@ export const Dialogue = reactive({
                 2: "*"
             }
         },
+        2: {
+            question:
+                [
+                    "How would you display something to the console?",
+                    "Which of these is an example of a string data type?",
+                    "What is the most common method of iterating through an array?"
+                ],
+            wrongAnswer:
+            {
+                0: [
+                    "console.writeline()",
+                    "console.read()",
+                    "console.logger()"
+                ],
+                1: [
+                    "35",
+                    "false",
+                    "[1, 2, 3]"
+                ],
+                2: [
+                    "interate()",
+                    "If-Else statement",
+                    "Do-While loop"
+                ]
+            },
+            correctAnswer: {
+                0: "console.log()",
+                1: "'Hello'",
+                2: "For Loop"
+            }
+        },
     }
 })
 

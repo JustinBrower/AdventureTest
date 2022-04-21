@@ -49,7 +49,8 @@ export default {
         }
       },
       appState: computed(() => AppState),
-      music: computed(() => AppState.music)
+      music: computed(() => AppState.music),
+      learned: computed(() => AppState.class)
     }
   }
 }

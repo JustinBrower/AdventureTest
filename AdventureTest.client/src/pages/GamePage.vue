@@ -131,7 +131,6 @@ export default {
         try {
           if (this.message[state].question[q]) {
             this.collectAnswers()
-            logger.log(this.message[state].question[q])
             document.getElementById('nextQuestion').classList.add('hidden')
             elementsService.displayQuestion(this.message[state].question[q], 50)
           } else {
@@ -147,7 +146,6 @@ export default {
       setActive(answer) {
         try {
           AppState.activeAnswer = answer
-          logger.log(this.activeAnswer)
         } catch (error) {
           logger.error(error)
           Pop.toast(error.message, 'error')
@@ -170,8 +168,6 @@ export default {
         try {
           if (this.message[state].wrongAnswer[q]) {
             elementsService.collectAnswers(this.message[state].wrongAnswer[q], this.message[state].correctAnswer[q])
-          } else {
-            logger.log("Done with state one")
           }
         } catch (error) {
           logger.error(error)

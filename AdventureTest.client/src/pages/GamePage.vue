@@ -226,9 +226,11 @@ export default {
   border: 5px solid rgb(63, 15, 15);
 }
 .wrap {
-  white-space: normal;
+  // word-wrap: break-word;
+  // flex-wrap: wrap;
   word-break: break-all;
-  overflow-wrap: break-word;
+  // overflow-wrap: break-word;
+  // flex-wrap: wrap-reverse;
 }
 .hidden {
   display: none;

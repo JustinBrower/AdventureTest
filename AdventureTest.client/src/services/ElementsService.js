@@ -12,10 +12,9 @@ class ElementsService {
         int = null
         document.getElementById('text').innerText = ''
         let copy = message.split("")
-        copy = copy.reverse()
         int = setInterval(() => {
             if (copy.length > 0) {
-                let char = copy.pop()
+                let char = copy.shift()
                 if (char) {
                     if (char == ' ') {
                         document.getElementById('text').innerHTML += '&nbsp'
@@ -36,10 +35,9 @@ class ElementsService {
         document.getElementById('reset').classList.add('hidden')
         document.getElementById('text').innerText = ''
         let copy = message.split("")
-        copy = copy.reverse()
         int = setInterval(() => {
             if (copy.length > 0) {
-                let char = copy.pop()
+                let char = copy.shift()
                 if (char) {
                     if (char == ' ') {
                         document.getElementById('text').innerHTML += '&nbsp'

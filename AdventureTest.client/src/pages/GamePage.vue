@@ -71,6 +71,11 @@
         id="reset"
         @click="reset"
       ></button>
+      <a :href="help" target="_blank">
+        <button class="btn btn-danger hidden bottom-right-help" id="help">
+          Help!
+        </button>
+      </a>
     </div>
   </div>
 </template>
@@ -86,11 +91,8 @@ import { logger } from '../utils/Logger'
 import Pop from '../utils/Pop'
 export default {
   setup() {
-    // ORDER OF THE INTRO DIALOGUE
     let introOrder = 0
-    // STATE OF THE GAME
     let state = 0
-    // QUESTION ORDER
     let q = 0
     onMounted(() => {
       try {
@@ -112,8 +114,8 @@ export default {
       sendGreeting() {
         try {
           introOrder++
-          if (this.greeting[introOrder]) {
-            elementsService.displayText(this.greeting[introOrder], 40)
+          if (Dialogue.messages.intro[introOrder]) {
+            elementsService.displayText(Dialogue.messages.intro[introOrder], 40)
           }
           if (introOrder == 2) {
             document.getElementById('nextQuestion').classList.remove('hidden')
@@ -126,11 +128,12 @@ export default {
       },
       sendQuestion() {
         try {
-          if (this.message[state].question[q]) {
+          if (Dialogue.messages[state].question[q]) {
             AppState.answers = []
             this.collectAnswers()
             document.getElementById('nextQuestion').classList.add('hidden')
-            elementsService.displayQuestion(this.message[state].question[q], 50)
+            elementsService.displayQuestion(Dialogue.messages[state].question[q], 50)
+            AppState.help = Dialogue.messages[state].help[q]
           } else {
             state++
             q = 0
@@ -164,8 +167,8 @@ export default {
       },
       collectAnswers() {
         try {
-          if (this.message[state].wrongAnswer[q]) {
-            elementsService.collectAnswers(this.message[state].wrongAnswer[q], this.message[state].correctAnswer[q])
+          if (Dialogue.messages[state].wrongAnswer[q]) {
+            elementsService.collectAnswers(Dialogue.messages[state].wrongAnswer[q], Dialogue.messages[state].correctAnswer[q])
           }
         } catch (error) {
           logger.error(error)
@@ -180,10 +183,9 @@ export default {
           Pop.toast(error.message, 'error')
         }
       },
-      greeting: computed(() => Dialogue.messages.intro),
-      message: computed(() => Dialogue.messages),
       activeAnswer: computed(() => AppState.activeAnswer),
-      answers: computed(() => AppState.answers)
+      answers: computed(() => AppState.answers),
+      help: computed(() => AppState.help)
     }
   }
 }
@@ -212,6 +214,11 @@ export default {
   position: absolute;
   bottom: 20px;
   right: 310px;
+}
+.bottom-right-help {
+  position: absolute;
+  bottom: 20px;
+  right: 240px;
 }
 .console {
   height: 86.4vh;

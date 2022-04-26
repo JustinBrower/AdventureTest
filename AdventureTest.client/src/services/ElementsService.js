@@ -32,6 +32,8 @@ class ElementsService {
         clearInterval(int)
         int = null
         document.getElementById('answers').classList.add('hidden')
+        document.getElementById('help').classList.add('hidden')
+        document.getElementById('reset').classList.add('hidden')
         document.getElementById('text').innerText = ''
         let copy = message.split("")
         copy = copy.reverse()
@@ -47,6 +49,8 @@ class ElementsService {
             } else {
                 document.getElementById('answers').classList.remove('hidden')
                 document.getElementById('submit').classList.remove('hidden')
+                document.getElementById('help').classList.remove('hidden')
+                document.getElementById('reset').classList.remove('hidden')
             }
         },
             delay)
@@ -63,6 +67,7 @@ class ElementsService {
         }
         document.getElementById('nextQuestion').classList.remove('hidden')
         document.getElementById('answers').classList.add('hidden')
+        document.getElementById('help').classList.add('hidden')
         document.getElementById('submit').classList.add('hidden')
         AppState.correctAnswer = null
         AppState.activeAnswer = null

@@ -1,12 +1,11 @@
 import { AppState } from "../AppState";
-import { Dialogue } from "../TextDump";
-import { logger } from "../utils/Logger";
 
+let recent = ''
 let int = null
 class ElementsService {
 
-    // TODO MAKE THIS pause LONGER ON '.'
     displayText(message, delay) {
+        recent = message
         clearInterval(int)
         int = null
         document.getElementById('text').innerText = ''
@@ -27,6 +26,7 @@ class ElementsService {
     }
 
     displayQuestion(message, delay) {
+        recent = message
         clearInterval(int)
         int = null
         document.getElementById('answers').classList.add('hidden')
@@ -78,6 +78,13 @@ class ElementsService {
         AppState.answers = answers
         let temp = AppState.answers.findIndex(a => a == AppState.correctAnswer)
         AppState.correctAnswer = temp
+    }
+    reset() {
+        if (recent) {
+            this.displayText(recent, 40)
+        } else {
+            console.log('did nothing');
+        }
     }
 }
 

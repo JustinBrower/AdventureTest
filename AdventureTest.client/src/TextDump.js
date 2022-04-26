@@ -94,15 +94,15 @@ export const Dialogue = reactive({
                     "[1, 2, 3]"
                 ],
                 2: [
-                    "interate()",
-                    "If-Else statement",
-                    "Do-While loop"
+                    "iterate()",
+                    "if-else statement",
+                    "do-while loop"
                 ]
             },
             correctAnswer: {
                 0: "console.log()",
-                1: "'Hello'",
-                2: "For Loop"
+                1: "'hello'",
+                2: "for loop"
             }
         },
     }

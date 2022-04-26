@@ -71,7 +71,7 @@
         id="reset"
         @click="reset"
       >
-        Reset Console
+        Reset
       </button>
     </div>
   </div>
@@ -176,16 +176,12 @@ export default {
       },
       reset() {
         try {
-          document.getElementById('answers').classList.add('hidden')
-          document.getElementById('submit').classList.add('hidden')
-          elementsService.displayText(this.message[state].question[q], 50)
+          elementsService.reset()
         } catch (error) {
           logger.error(error)
           Pop.toast(error.message, 'error')
         }
       },
-
-
       greeting: computed(() => Dialogue.messages.intro),
       message: computed(() => Dialogue.messages),
       activeAnswer: computed(() => AppState.activeAnswer),

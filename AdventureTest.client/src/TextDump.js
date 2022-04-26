@@ -1,8 +1,5 @@
-import { reactive } from "vue";
 
-
-
-export const Dialogue = reactive({
+export const Dialogue = {
 
     messages: {
 
@@ -27,7 +24,7 @@ export const Dialogue = reactive({
                 ],
                 1: [
                     "<h1>",
-                    "<small>",
+                    "<tiny>",
                     "<h9>"
                 ],
                 2: [
@@ -36,20 +33,23 @@ export const Dialogue = reactive({
                     "Hard-Text-Middle-Length"
                 ]
             },
-            correctAnswer: {
-
-                0: "<h1>",
-                1: "<h6>",
-                2: "Hyper-Text-Markup-Language"
-            }
+            correctAnswer: [
+                "<h1>",
+                "<h6>",
+                "Hyper-Text-Markup-Language"
+            ],
+            help: [
+                "https://www.w3schools.com/tags/default.asp",
+                "https://www.w3schools.com/tags/default.asp",
+                "https://www.w3schools.com/tags/default.asp"
+            ]
         },
         1: {
-            question:
-                [
-                    "What exactly does CSS stand for?",
-                    "What tag do you use for in-line styling?",
-                    "What selector is used when selecting ALL elements?"
-                ],
+            question: [
+                "What exactly does CSS stand for?",
+                "What tag do you use for in-line styling?",
+                "What selector is used when selecting ALL elements?"
+            ],
             wrongAnswer:
             {
                 0: [
@@ -72,15 +72,19 @@ export const Dialogue = reactive({
                 0: "Cascading-Style-Sheets",
                 1: "Style",
                 2: "*"
-            }
+            },
+            help: [
+                "https://codeworksacademy.com/fs-student-guide/resources/wk1/03-CSS.html",
+                "https://codeworksacademy.com/fs-student-guide/resources/wk1/03-CSS.html",
+                "https://codeworksacademy.com/fs-student-guide/resources/wk1/03-CSS.html"
+            ]
         },
         2: {
-            question:
-                [
-                    "How would you display something to the console?",
-                    "Which of these is an example of a string data type?",
-                    "What is the most common method of iterating through an array?"
-                ],
+            question: [
+                "How would you display something to the console?",
+                "Which of these is an example of a string data type?",
+                "What is the most common method of iterating through an array?"
+            ],
             wrongAnswer:
             {
                 0: [
@@ -103,10 +107,31 @@ export const Dialogue = reactive({
                 0: "console.log()",
                 1: "'hello'",
                 2: "for loop"
-            }
+            },
+            help: [
+                "https://eloquentjavascript.net/00_intro.html",
+                "https://eloquentjavascript.net/01_values.html",
+                "https://eloquentjavascript.net/05_higher_order.html"
+            ]
         },
+        goodJob: [
+            "Wow! You're doing great! Let's keep going...",
+            "Nice! But can you handle what's next?",
+            "Good good... but what about this...",
+            "Pretty good, let's see about this next one.",
+            "Dang you're pretty good, next question.",
+            "Alright! Moving on to something more challenging..."
+        ],
+        badJob: [
+            "Not quite, let's see about this next one.",
+            "You may need to study more!",
+            "You didn't get that one... Let's try this.",
+            "Mm, you must have misclicked. Another try!",
+            "That wasn't right, but here's another question.",
+            "Not that one. Here's another."
+        ]
     }
-})
+}
 
 
 

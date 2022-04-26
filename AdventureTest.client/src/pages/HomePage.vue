@@ -31,8 +31,6 @@
 </template>
 
 <script>
-import { logger } from '../utils/Logger'
-import Pop from '../utils/Pop'
 export default {
   name: 'Home',
   setup() {

@@ -1,4 +1,6 @@
 import { AppState } from "../AppState";
+import { Dialogue } from "../TextDump";
+import { logger } from "../utils/Logger";
 
 let recent = ''
 let int = null
@@ -51,10 +53,13 @@ class ElementsService {
     }
 
     checkAnswer() {
+        let g = Math.floor(Math.random() * Dialogue.messages.badJob.length)
+        let b = Math.floor(Math.random() * Dialogue.messages.goodJob.length)
         if (AppState.correctAnswer == AppState.activeAnswer) {
-            this.displayText("Correct! But what about this...", 70)
+            this.displayText(Dialogue.messages.goodJob[g], 40)
         } else {
-            this.displayText("Not quite! Let's try another...", 70)
+            this.displayText(Dialogue.messages.badJob[b], 40)
+            AppState.strikes++
         }
         document.getElementById('nextQuestion').classList.remove('hidden')
         document.getElementById('answers').classList.add('hidden')
@@ -76,8 +81,8 @@ class ElementsService {
                 answers[randomIndex], answers[currentIndex]];
         }
         AppState.answers = answers
-        let temp = AppState.answers.findIndex(a => a == AppState.correctAnswer)
-        AppState.correctAnswer = temp
+        let index = AppState.answers.findIndex(a => a == AppState.correctAnswer)
+        AppState.correctAnswer = index
     }
     reset() {
         if (recent) {

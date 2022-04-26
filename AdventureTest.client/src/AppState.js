@@ -8,5 +8,6 @@ export const AppState = reactive({
   game: 0,
   activeAnswer: null,
   answers: [],
-  correctAnswer: ""
+  correctAnswer: null,
+  strikes: 0
 })

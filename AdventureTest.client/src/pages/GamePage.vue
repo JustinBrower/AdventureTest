@@ -67,12 +67,10 @@
         Submit
       </button>
       <button
-        class="btn btn-warning hidden bottom-right-reset"
+        class="btn btn-warning bottom-right-reset mdi mdi-restart mdi-16px"
         id="reset"
         @click="reset"
-      >
-        Reset
-      </button>
+      ></button>
     </div>
   </div>
 </template>
@@ -98,7 +96,6 @@ export default {
       try {
         document.getElementById('next').classList.remove('hidden')
         elementsService.displayText(Dialogue.messages.intro[introOrder], 40)
-        elementsService.collectAnswers(Dialogue.messages[state].wrongAnswer[q], Dialogue.messages[q].correctAnswer[q])
       } catch (error) {
         logger.error(error)
         Pop.toast(error.message, 'error')
@@ -130,6 +127,7 @@ export default {
       sendQuestion() {
         try {
           if (this.message[state].question[q]) {
+            AppState.answers = []
             this.collectAnswers()
             document.getElementById('nextQuestion').classList.add('hidden')
             elementsService.displayQuestion(this.message[state].question[q], 50)
@@ -213,7 +211,7 @@ export default {
 .bottom-right-reset {
   position: absolute;
   bottom: 20px;
-  right: 238px;
+  right: 310px;
 }
 .console {
   height: 86.4vh;

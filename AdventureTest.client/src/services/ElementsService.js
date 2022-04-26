@@ -1,6 +1,5 @@
 import { AppState } from "../AppState";
 import { Dialogue } from "../TextDump";
-import { logger } from "../utils/Logger";
 
 let recent = ''
 let int = null

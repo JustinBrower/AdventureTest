@@ -1,8 +1,11 @@
 import { AppState } from "../AppState";
 import { Dialogue } from "../TextDump";
+import { logger } from "../utils/Logger";
 
 let recent = ''
 let int = null
+let done = []
+
 class ElementsService {
 
     displayText(message, delay) {
@@ -68,6 +71,19 @@ class ElementsService {
         document.getElementById('submit').classList.add('hidden')
         AppState.correctAnswer = null
         AppState.activeAnswer = null
+    }
+
+    rando(state) {
+        // FIXME MAKE THIS NOT CHOOSE PREVIOUSLY CHOSEN ANSWERS
+
+        let copy = Dialogue.messages[state].question
+
+
+
+
+        let random = Math.floor(Math.random() * copy.length)
+        done.push({ state: state, index: random })
+        return random
     }
 
     collectAnswers(wrongAnswers, rightAnswer) {

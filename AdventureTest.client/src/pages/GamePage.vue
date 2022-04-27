@@ -92,11 +92,13 @@ import Pop from '../utils/Pop'
 export default {
   setup() {
     let introOrder = 0
+    let qOrder = 0
     let state = 0
     let q = 0
     onMounted(() => {
       try {
         document.getElementById('next').classList.remove('hidden')
+        q = elementsService.rando(0)
         elementsService.displayText(Dialogue.messages.intro[introOrder], 40)
       } catch (error) {
         logger.error(error)
@@ -109,6 +111,7 @@ export default {
     })
     return {
       introOrder,
+      qOrder,
       state,
       q,
       sendGreeting() {
@@ -128,20 +131,22 @@ export default {
       },
       sendQuestion() {
         try {
-          if (Dialogue.messages[state].question[q]) {
+          if (Dialogue.messages[state].question[q] && qOrder < 3) {
             AppState.answers = []
             this.collectAnswers()
             document.getElementById('nextQuestion').classList.add('hidden')
             elementsService.displayQuestion(Dialogue.messages[state].question[q], 50)
             AppState.help = Dialogue.messages[state].help[q]
+            qOrder++
           } else {
+            qOrder = 0
             state++
-            q = 0
+            q = elementsService.rando(state)
             this.sendQuestion()
           }
         } catch (error) {
           logger.error(error)
-          Pop.toast(error.message, 'error')
+          Pop.toast("Out of questions", 'error')
         }
       },
       setActive(answer) {
@@ -156,7 +161,7 @@ export default {
         try {
           if (this.activeAnswer != undefined) {
             elementsService.checkAnswer()
-            q++
+            q = elementsService.rando(state)
           } else {
             document.getElementById('text').innerText += "Please select an answer."
           }

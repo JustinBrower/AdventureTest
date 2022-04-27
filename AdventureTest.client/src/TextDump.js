@@ -11,9 +11,12 @@ export const Dialogue = {
         0: {
             question:
                 [
-                    "First question... Tell me which HTML tag you would use to get the BIGGEST font size you can?",
+                    "Which HTML tag you would use to get the BIGGEST font size you can?",
                     "Can you tell me which tag you'd use to get the SMALLEST font size?",
-                    "Finally, what does HTML actually stand for?"
+                    "What does HTML actually stand for?",
+                    "Which tag is typically used to display text?",
+                    "Which example is the proper way to add attributes to a tag?",
+                    "What is an element?"
                 ],
             wrongAnswer:
             {
@@ -31,17 +34,38 @@ export const Dialogue = {
                     "Handled-To-Multi-Level",
                     "Hold-This-Moldy-Lettuce",
                     "Hard-Text-Middle-Length"
+                ],
+                3: [
+                    "<div>",
+                    "<section>",
+                    "<audio>"
+                ],
+                4: [
+                    "class='example'<div>",
+                    "<class='example' div>",
+                    "<div> class='example'",
+                ],
+                5: [
+                    "The information inbetween the start and end tags",
+                    "An attribute on the tag",
+                    "The class on the tag"
                 ]
             },
             correctAnswer: [
                 "<h1>",
                 "<h6>",
-                "Hyper-Text-Markup-Language"
+                "Hyper-Text-Markup-Language",
+                "<p>",
+                "<div class='example'>",
+                "Everything from the start tag to the end tag"
             ],
             help: [
                 "https://www.w3schools.com/tags/default.asp",
                 "https://www.w3schools.com/tags/default.asp",
-                "https://www.w3schools.com/tags/default.asp"
+                "https://www.w3schools.com/tags/default.asp",
+                "https://www.w3schools.com/tags/default.asp",
+                "https://www.w3schools.com/tags/default.asp",
+
             ]
         },
         1: {

@@ -104,7 +104,14 @@ export const Dialogue = {
             question: [
                 "What exactly does CSS stand for?",
                 "What tag do you use for in-line styling?",
-                "What selector is used when selecting ALL elements?"
+                "What selector is used when selecting ALL elements?",
+                "How do you name the end of a CSS file?",
+                "What is the correct way to use style?",
+                "Which selector is used to define a class in CSS?",
+                "Is in-line styling good practice?",
+                "An element nested in another element is called what?",
+                "Which direction indicator is NOT used in CSS or HTML?",
+                "You CANNOT assign CSS attributes to which example?"
             ],
             wrongAnswer:
             {
@@ -122,24 +129,72 @@ export const Dialogue = {
                     "#",
                     ".",
                     "^"
+                ],
+                3: [
+                    ".style",
+                    ".html",
+                    ".link"
+                ],
+                4: [
+                    "color='style: blue;'",
+                    "blue='color: style;'",
+                    "style='blue: color;'"
+                ],
+                5: [
+                    "*",
+                    "#",
+                    "$",
+                ],
+                6: [
+                    "Yes"
+                ],
+                7: [
+                    "Parent",
+                    "Sibling",
+                    "Cousin"
+                ],
+                8: [
+                    "Center",
+                    "End",
+                    "Start"
+                ],
+                9: [
+                    "Classes",
+                    "Children of Elements",
+                    "Tags"
                 ]
             },
             correctAnswer: [
                 "Cascading-Style-Sheets",
                 "Style",
-                "*"
+                "*",
+                ".css",
+                "style='color: blue;'",
+                ".",
+                "No",
+                "Child",
+                "Up",
+                "Network Requests"
             ],
             help: [
                 "https://codeworksacademy.com/fs-student-guide/resources/wk1/03-CSS.html",
                 "https://codeworksacademy.com/fs-student-guide/resources/wk1/03-CSS.html",
-                "https://flukeout.github.io/"
+                "https://flukeout.github.io/",
+                "https://codeworksacademy.com/fs-student-guide/resources/wk1/03-CSS.html",
+                "https://codeworksacademy.com/fs-student-guide/resources/wk1/03-CSS.html",
+                "https://codeworksacademy.com/fs-student-guide/resources/wk1/03-CSS.html",
+                "https://codeworksacademy.com/fs-student-guide/resources/wk1/03-CSS.html",
+                "https://codeworksacademy.com/fs-student-guide/resources/wk1/03-CSS.html",
+                "https://codeworksacademy.com/fs-student-guide/resources/wk1/03-CSS.html",
+                "https://codeworksacademy.com/fs-student-guide/resources/wk1/03-CSS.html",
             ]
         },
         2: {
             question: [
                 "How would you display something to the console?",
                 "Which of these is an example of a string data type?",
-                "What is the most common method of iterating through an array?"
+                "What is the most common method of iterating through an array?",
+                "Which of these is NOT a Javascript data type?"
             ],
             wrongAnswer:
             {
@@ -157,17 +212,25 @@ export const Dialogue = {
                     "iterate()",
                     "if-else statement",
                     "do-while loop"
+                ],
+                3: [
+                    "Object",
+                    "Boolean",
+                    "Number"
                 ]
             },
             correctAnswer: [
                 "console.log()",
                 "'hello'",
-                "for loop"
+                "for loop",
+                "List"
             ],
             help: [
                 "https://eloquentjavascript.net/00_intro.html",
                 "https://eloquentjavascript.net/01_values.html",
+                "https://eloquentjavascript.net/05_higher_order.html",
                 "https://eloquentjavascript.net/05_higher_order.html"
+
             ]
         },
         goodJob: [

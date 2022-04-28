@@ -101,6 +101,8 @@ export default {
     onMounted(() => {
       try {
         document.getElementById('next').classList.remove('hidden')
+        document.getElementById('answers', 'submit', 'help', 'nextQuestion').classList.add('hidden')
+
         q = elementsService.rando(0)
         elementsService.displayText(Dialogue.messages.intro[introOrder], 40)
       } catch (error) {

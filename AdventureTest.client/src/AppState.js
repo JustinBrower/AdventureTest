@@ -10,5 +10,6 @@ export const AppState = reactive({
   answers: [],
   correctAnswer: null,
   strikes: 0,
-  help: ''
+  help: '',
+  state: 0
 })

@@ -7,7 +7,10 @@
         alt=""
       />
     </div>
-    <div class="top-right console p-2">
+    <div
+      :class="{ state0: state === 0, state1: state === 1, state2: state === 2 }"
+      class="top-right console p-2"
+    >
       <strong class="wrap" id="text"></strong>
 
       <strong id="answers" class="hidden">
@@ -139,6 +142,7 @@ export default {
             AppState.help = Dialogue.messages[state].help[q]
             qOrder++
           } else {
+            AppState.state++
             qOrder = 0
             state++
             q = elementsService.rando(state)
@@ -190,7 +194,8 @@ export default {
       },
       activeAnswer: computed(() => AppState.activeAnswer),
       answers: computed(() => AppState.answers),
-      help: computed(() => AppState.help)
+      help: computed(() => AppState.help),
+      state: computed(() => AppState.state)
     }
   }
 }
@@ -227,7 +232,7 @@ export default {
 }
 .console {
   height: 86.4vh;
-  background-color: rgb(207, 120, 120);
+  // background-color: rgb(207, 120, 120);
   width: 384px;
   border: 5px solid rgb(63, 15, 15);
 }
@@ -246,5 +251,14 @@ export default {
 }
 .green {
   color: green;
+}
+.state0 {
+  background-color: rgb(207, 120, 120);
+}
+.state1 {
+  background-color: rgb(120, 187, 187);
+}
+.state2 {
+  background-color: rgb(199, 199, 87);
 }
 </style>

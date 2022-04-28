@@ -74,16 +74,18 @@ class ElementsService {
     }
 
     rando(state) {
-        // FIXME MAKE THIS NOT CHOOSE PREVIOUSLY CHOSEN ANSWERS
-
         let copy = Dialogue.messages[state].question
-
-
-
-
-        let random = Math.floor(Math.random() * copy.length)
-        done.push({ state: state, index: random })
-        return random
+        let num = 0
+        let doneCopy = done.filter(o => o.state == state)
+        let bad = []
+        for (let i = 0; i < doneCopy.length; i++) {
+            bad.push(doneCopy[i].index)
+        }
+        do {
+            num = Math.floor(Math.random() * copy.length)
+        } while (bad.includes(num))
+        done.push({ state: state, index: num })
+        return num
     }
 
     collectAnswers(wrongAnswers, rightAnswer) {

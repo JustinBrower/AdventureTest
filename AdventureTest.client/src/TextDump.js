@@ -16,7 +16,11 @@ export const Dialogue = {
                     "What does HTML actually stand for?",
                     "Which tag is typically used to display text?",
                     "Which example is the proper way to add attributes to a tag?",
-                    "What is an element?"
+                    "What is an element?",
+                    "Correct example of a div tag?",
+                    "How should you always end the name of your html file?",
+                    "To effect the entire application, which tag would you add attributes to?",
+                    "How do you open your dev tools in Google Chrome?"
                 ],
             wrongAnswer:
             {
@@ -49,6 +53,26 @@ export const Dialogue = {
                     "The information inbetween the start and end tags",
                     "An attribute on the tag",
                     "The class on the tag"
+                ],
+                6: [
+                    ">div<",
+                    "<>div",
+                    "div"
+                ],
+                7: [
+                    ".index",
+                    ".file",
+                    ".name"
+                ],
+                8: [
+                    "<header>",
+                    "<main>",
+                    "<meta>"
+                ],
+                9: [
+                    "inspect element",
+                    "F12",
+                    "CTRL + Shift + i"
                 ]
             },
             correctAnswer: [
@@ -57,15 +81,23 @@ export const Dialogue = {
                 "Hyper-Text-Markup-Language",
                 "<p>",
                 "<div class='example'>",
-                "Everything from the start tag to the end tag"
+                "Everything from the start tag to the end tag",
+                "<div>",
+                ".html",
+                "<body>",
+                "All of the above"
             ],
             help: [
+                "https://www.w3schools.com/html/html_basic.asp",
+                "https://www.w3schools.com/html/html_basic.asp",
+                "https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics",
+                "https://www.w3schools.com/html/html_paragraphs.asp",
+                "https://www.w3schools.com/html/html_attributes.asp",
+                "https://www.w3schools.com/html/html_elements.asp",
                 "https://www.w3schools.com/tags/default.asp",
-                "https://www.w3schools.com/tags/default.asp",
-                "https://www.w3schools.com/tags/default.asp",
-                "https://www.w3schools.com/tags/default.asp",
-                "https://www.w3schools.com/tags/default.asp",
-
+                "https://www.thoughtco.com/naming-html-files-3466503",
+                "https://www.w3schools.com/tags/tag_body.asp",
+                "https://www.hostinger.com/tutorials/website/how-to-inspect-and-change-style-using-google-chrome",
             ]
         },
         1: {
@@ -92,15 +124,15 @@ export const Dialogue = {
                     "^"
                 ]
             },
-            correctAnswer: {
-                0: "Cascading-Style-Sheets",
-                1: "Style",
-                2: "*"
-            },
+            correctAnswer: [
+                "Cascading-Style-Sheets",
+                "Style",
+                "*"
+            ],
             help: [
                 "https://codeworksacademy.com/fs-student-guide/resources/wk1/03-CSS.html",
                 "https://codeworksacademy.com/fs-student-guide/resources/wk1/03-CSS.html",
-                "https://codeworksacademy.com/fs-student-guide/resources/wk1/03-CSS.html"
+                "https://flukeout.github.io/"
             ]
         },
         2: {
@@ -127,11 +159,11 @@ export const Dialogue = {
                     "do-while loop"
                 ]
             },
-            correctAnswer: {
-                0: "console.log()",
-                1: "'hello'",
-                2: "for loop"
-            },
+            correctAnswer: [
+                "console.log()",
+                "'hello'",
+                "for loop"
+            ],
             help: [
                 "https://eloquentjavascript.net/00_intro.html",
                 "https://eloquentjavascript.net/01_values.html",

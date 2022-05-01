@@ -8,10 +8,7 @@
     <div class="row justify-content-center">
       <div class="col-8 d-flex justify-content-center pt-5">
         <router-link :to="{ name: 'Game' }">
-          <button
-            style="width: 50vh; height: 8vh"
-            class="btn btn-dark rounded-pill hoverable"
-          >
+          <button class="btn btn-dark rounded-pill hoverable menu-btn">
             <h1>New Game</h1>
           </button>
         </router-link>
@@ -19,10 +16,7 @@
     </div>
     <div class="row justify-content-center">
       <div class="col-8 d-flex justify-content-center pt-5">
-        <button
-          style="width: 50vh; height: 8vh"
-          class="btn btn-dark rounded-pill hoverable"
-        >
+        <button class="btn btn-dark rounded-pill hoverable menu-btn">
           <h1>Continue</h1>
         </button>
       </div>
@@ -41,4 +35,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.menu-btn {
+  width: 50vh;
+  height: 8vh;
+}
 </style>

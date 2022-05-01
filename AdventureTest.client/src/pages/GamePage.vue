@@ -234,16 +234,13 @@ export default {
 }
 .console {
   height: 86.4vh;
-  // background-color: rgb(207, 120, 120);
   width: 384px;
   border: 5px solid rgb(63, 15, 15);
 }
 .wrap {
-  // word-wrap: break-word;
-  // flex-wrap: wrap;
+  word-wrap: break-word;
   word-break: break-all;
-  // overflow-wrap: break-word;
-  // flex-wrap: wrap-reverse;
+  overflow-wrap: break-word;
 }
 .hidden {
   display: none;

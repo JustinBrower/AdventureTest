@@ -19,13 +19,13 @@ class ElementsService {
                 let char = copy.shift()
                 if (char) {
                     if (char == ' ') {
-                        document.getElementById('text').innerHTML += '&nbsp'
+                        document.getElementById('text').innerText += ' '
                     }
                     document.getElementById('text').innerText += char
                 }
             }
         },
-            delay)
+            delay || 40)
     }
 
     displayQuestion(message, delay) {

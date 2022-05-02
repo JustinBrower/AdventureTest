@@ -78,7 +78,6 @@ class ElementsService {
         let num = 0
         let doneCopy = done.filter(o => o.state == state)
         let bad = []
-        // THIS CRASHES THE APP LMAO
         for (let i = 0; i < doneCopy.length; i++) {
             bad.push(doneCopy[i].index)
         }

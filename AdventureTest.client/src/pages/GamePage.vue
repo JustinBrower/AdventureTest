@@ -1,12 +1,15 @@
 <template>
+<div>
+  <Grid/>
+</div>
   <div class="container-fluid">
-    <div class="row justify-content-center">
+    <!-- <div class="row justify-content-center">
       <img
         class="img-fluid p-0 bg-size"
         src="../assets/img/dungeon2.png"
         alt=""
       />
-    </div>
+    </div> -->
     <div
       :class="{ state0: state === 0, state1: state === 1, state2: state === 2 }"
       class="top-right console p-2"
@@ -93,114 +96,123 @@ import { onMounted, watchEffect } from '@vue/runtime-core'
 import { logger } from '../utils/Logger'
 import Pop from '../utils/Pop'
 import { textService } from '../services/TextService'
+import Grid from '../components/Grid.vue'
 export default {
-  setup() {
-    let introOrder = 0
-    let qOrder = 0
-    let state = 0
-    let q = 0
-    onMounted(() => {
-      try {
-        document.getElementById('next').classList.remove('hidden')
-        document.getElementById('answers', 'submit', 'help', 'nextQuestion').classList.add('hidden')
-
-        q = answersService.rando(0)
-        textService.displayText(Dialogue.messages.intro[introOrder], 40)
-      } catch (error) {
-        logger.error(error)
-        Pop.toast(error.message, 'error')
-      }
-    })
-    watchEffect(() => {
-      AppState.game
-      AppState.activeAnswer
-    })
-    return {
-      introOrder,
-      qOrder,
-      state,
-      q,
-      sendGreeting() {
-        try {
-          introOrder++
-          if (Dialogue.messages.intro[introOrder]) {
-            textService.displayText(Dialogue.messages.intro[introOrder], 40)
-          }
-          if (introOrder == 2) {
-            document.getElementById('nextQuestion').classList.remove('hidden')
-            document.getElementById('next').classList.add('hidden')
-          }
-        } catch (error) {
-          logger.error(error)
-          Pop.toast(error.message, 'error')
-        }
-      },
-      sendQuestion() {
-        try {
-          if (Dialogue.messages[state].question[q] && qOrder < 3) {
-            AppState.answers = []
-            this.collectAnswers()
-            document.getElementById('nextQuestion').classList.add('hidden')
-            textService.displayQuestion(Dialogue.messages[state].question[q], 50)
-            AppState.help = Dialogue.messages[state].help[q]
-            qOrder++
-          } else {
-            AppState.state++
-            qOrder = 0
-            state++
-            q = answersService.rando(state)
-            this.sendQuestion()
-          }
-        } catch (error) {
-          logger.error(error)
-          Pop.toast("Out of questions", 'error')
-        }
-      },
-      setActive(answer) {
-        try {
-          AppState.activeAnswer = answer
-        } catch (error) {
-          logger.error(error)
-          Pop.toast(error.message, 'error')
-        }
-      },
-      submitAnswer() {
-        try {
-          if (this.activeAnswer != undefined) {
-            answersService.checkAnswer()
-            q = answersService.rando(state)
-          } else {
-            document.getElementById('text').innerText += "Please select an answer."
-          }
-        } catch (error) {
-          logger.error(error)
-          Pop.toast(error.message, 'error')
-        }
-      },
-      collectAnswers() {
-        try {
-          if (Dialogue.messages[state].wrongAnswer[q]) {
-            answersService.collectAnswers(Dialogue.messages[state].wrongAnswer[q], Dialogue.messages[state].correctAnswer[q])
-          }
-        } catch (error) {
-          logger.error(error)
-          Pop.toast(error.message, 'error')
-        }
-      },
-      reset() {
-        try {
-          textService.reset()
-        } catch (error) {
-          logger.error(error)
-          Pop.toast(error.message, 'error')
-        }
-      },
-      activeAnswer: computed(() => AppState.activeAnswer),
-      answers: computed(() => AppState.answers),
-      help: computed(() => AppState.help),
-      state: computed(() => AppState.state)
-    }
-  }
+    setup() {
+        let introOrder = 0;
+        let qOrder = 0;
+        let state = 0;
+        let q = 0;
+        onMounted(() => {
+            try {
+                document.getElementById("next").classList.remove("hidden");
+                document.getElementById("answers", "submit", "help", "nextQuestion").classList.add("hidden");
+                q = answersService.rando(0);
+                textService.displayText(Dialogue.messages.intro[introOrder], 40);
+            }
+            catch (error) {
+                logger.error(error);
+                Pop.toast(error.message, "error");
+            }
+        });
+        watchEffect(() => {
+            AppState.activeAnswer;
+        });
+        return {
+            introOrder,
+            qOrder,
+            state,
+            q,
+            sendGreeting() {
+                try {
+                    introOrder++;
+                    if (Dialogue.messages.intro[introOrder]) {
+                        textService.displayText(Dialogue.messages.intro[introOrder], 40);
+                    }
+                    if (introOrder == 2) {
+                        document.getElementById("nextQuestion").classList.remove("hidden");
+                        document.getElementById("next").classList.add("hidden");
+                    }
+                }
+                catch (error) {
+                    logger.error(error);
+                    Pop.toast(error.message, "error");
+                }
+            },
+            sendQuestion() {
+                try {
+                    if (Dialogue.messages[state].question[q] && qOrder < 3) {
+                        AppState.answers = [];
+                        this.collectAnswers();
+                        document.getElementById("nextQuestion").classList.add("hidden");
+                        textService.displayQuestion(Dialogue.messages[state].question[q], 50);
+                        AppState.help = Dialogue.messages[state].help[q];
+                        qOrder++;
+                    }
+                    else {
+                        AppState.state++;
+                        qOrder = 0;
+                        state++;
+                        q = answersService.rando(state);
+                        this.sendQuestion();
+                    }
+                }
+                catch (error) {
+                    logger.error(error);
+                    Pop.toast("Out of questions", "error");
+                }
+            },
+            setActive(answer) {
+                try {
+                    AppState.activeAnswer = answer;
+                }
+                catch (error) {
+                    logger.error(error);
+                    Pop.toast(error.message, "error");
+                }
+            },
+            submitAnswer() {
+                try {
+                    if (this.activeAnswer != undefined) {
+                        answersService.checkAnswer();
+                        q = answersService.rando(state);
+                    }
+                    else {
+                        document.getElementById("text").innerText += "Please select an answer.";
+                    }
+                }
+                catch (error) {
+                    logger.error(error);
+                    Pop.toast(error.message, "error");
+                }
+            },
+            collectAnswers() {
+                try {
+                    if (Dialogue.messages[state].wrongAnswer[q]) {
+                        answersService.collectAnswers(Dialogue.messages[state].wrongAnswer[q], Dialogue.messages[state].correctAnswer[q]);
+                    }
+                }
+                catch (error) {
+                    logger.error(error);
+                    Pop.toast(error.message, "error");
+                }
+            },
+            reset() {
+                try {
+                    textService.reset();
+                }
+                catch (error) {
+                    logger.error(error);
+                    Pop.toast(error.message, "error");
+                }
+            },
+            activeAnswer: computed(() => AppState.activeAnswer),
+            answers: computed(() => AppState.answers),
+            help: computed(() => AppState.help),
+            state: computed(() => AppState.state)
+        };
+    },
+    components: { Grid }
 }
 </script>
 
@@ -215,7 +227,7 @@ export default {
 }
 .top-right {
   position: absolute;
-  top: 71px;
+  top: 70px;
   right: 0.1px;
 }
 .bottom-right {
@@ -234,7 +246,7 @@ export default {
   right: 240px;
 }
 .console {
-  height: 86.4vh;
+  height: 86.5vh;
   width: 384px;
   border: 5px solid rgb(63, 15, 15);
 }

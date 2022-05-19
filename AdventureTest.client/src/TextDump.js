@@ -5,7 +5,7 @@ export const Dialogue = {
     questionObjects: [
         {
             question: "",
-            wrongAnswers: [],
+            wrongAnswers: ['', '', ''],
             correctAnswer: "",
             type: "",
             help: "",

@@ -87,11 +87,12 @@
 <script>
 import { computed } from '@vue/reactivity'
 import { AppState } from '../AppState'
-import { elementsService } from "../services/ElementsService"
+import { answersService } from "../services/AnswersService"
 import { Dialogue } from "../TextDump"
 import { onMounted, watchEffect } from '@vue/runtime-core'
 import { logger } from '../utils/Logger'
 import Pop from '../utils/Pop'
+import { textService } from '../services/TextService'
 export default {
   setup() {
     let introOrder = 0
@@ -103,8 +104,8 @@ export default {
         document.getElementById('next').classList.remove('hidden')
         document.getElementById('answers', 'submit', 'help', 'nextQuestion').classList.add('hidden')
 
-        q = elementsService.rando(0)
-        elementsService.displayText(Dialogue.messages.intro[introOrder], 40)
+        q = answersService.rando(0)
+        textService.displayText(Dialogue.messages.intro[introOrder], 40)
       } catch (error) {
         logger.error(error)
         Pop.toast(error.message, 'error')
@@ -123,7 +124,7 @@ export default {
         try {
           introOrder++
           if (Dialogue.messages.intro[introOrder]) {
-            elementsService.displayText(Dialogue.messages.intro[introOrder], 40)
+            textService.displayText(Dialogue.messages.intro[introOrder], 40)
           }
           if (introOrder == 2) {
             document.getElementById('nextQuestion').classList.remove('hidden')
@@ -140,14 +141,14 @@ export default {
             AppState.answers = []
             this.collectAnswers()
             document.getElementById('nextQuestion').classList.add('hidden')
-            elementsService.displayQuestion(Dialogue.messages[state].question[q], 50)
+            textService.displayQuestion(Dialogue.messages[state].question[q], 50)
             AppState.help = Dialogue.messages[state].help[q]
             qOrder++
           } else {
             AppState.state++
             qOrder = 0
             state++
-            q = elementsService.rando(state)
+            q = answersService.rando(state)
             this.sendQuestion()
           }
         } catch (error) {
@@ -166,8 +167,8 @@ export default {
       submitAnswer() {
         try {
           if (this.activeAnswer != undefined) {
-            elementsService.checkAnswer()
-            q = elementsService.rando(state)
+            answersService.checkAnswer()
+            q = answersService.rando(state)
           } else {
             document.getElementById('text').innerText += "Please select an answer."
           }
@@ -179,7 +180,7 @@ export default {
       collectAnswers() {
         try {
           if (Dialogue.messages[state].wrongAnswer[q]) {
-            elementsService.collectAnswers(Dialogue.messages[state].wrongAnswer[q], Dialogue.messages[state].correctAnswer[q])
+            answersService.collectAnswers(Dialogue.messages[state].wrongAnswer[q], Dialogue.messages[state].correctAnswer[q])
           }
         } catch (error) {
           logger.error(error)
@@ -188,7 +189,7 @@ export default {
       },
       reset() {
         try {
-          elementsService.reset()
+          textService.reset()
         } catch (error) {
           logger.error(error)
           Pop.toast(error.message, 'error')

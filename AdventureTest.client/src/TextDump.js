@@ -1,6 +1,18 @@
 
 export const Dialogue = {
 
+    // NOTE THIS IS PROBABLY THE BETTER WAY TO STORE QUESTIONS. WILL WANT TO IMPLEMENT CSV FILES.
+    questionObjects: [
+        {
+            question: "",
+            wrongAnswers: [],
+            correctAnswer: "",
+            type: "",
+            help: "",
+            difficulty: 0
+        },
+    ],
+
     messages: {
 
         intro: [

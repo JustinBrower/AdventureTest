@@ -5,22 +5,16 @@ let int = null
 class MazeService {
 
 
-  // FIXME JUST NEED TO CLEAR THE INT
   // NOTE DISTANCE FORMULA d = √[(x₂ - x₁)² + (y₂ - y₁)²],
 
   move(location, destination) {
     if (location.x == destination.x && location.y == destination.y) {
+      clearInterval(int)
       return logger.log("Already here")
     }
-    let x = Math.pow((location.x - destination.x), 2)
-    let y = Math.pow((location.y - destination.y), 2)
-    let d = Math.sqrt(x + y)
-
-
     clearInterval(int)
     int = null
     int = setInterval(() => {
-      logger.log(location, destination)
       let nearestInt = 50
       let nearestCell = {}
       let nearby = [
@@ -33,10 +27,10 @@ class MazeService {
         { 'x': location.x, 'y': location.y + 1 },
         { 'x': location.x, 'y': location.y - 1},
       ]
-      for (let i = 0; i < nearby.length; i++) {
 
-    let thisX = Math.pow((nearby[i].x - destination.x), 2)
-    let thisY = Math.pow((nearby[i].y - destination.y), 2)
+      for (let i = 0; i < nearby.length; i++) {
+        let thisX = Math.pow((nearby[i].x - destination.x), 2)
+        let thisY = Math.pow((nearby[i].y - destination.y), 2)
         let thisD = Math.sqrt(thisX + thisY)
         if (thisD < nearestInt) {
           nearestInt = thisD
@@ -44,12 +38,13 @@ class MazeService {
         }
       }
       AppState.location = nearestCell
-      if (nearestCell != destination) {
+      if (nearestCell.x != destination.x || nearestCell.y != destination.y) {
         this.move(nearestCell, destination)
+      } else {
+        clearInterval(int)
       }
     }
-    ,1000)
-    // clearInterval(int)
+    ,500)
   }
 
 

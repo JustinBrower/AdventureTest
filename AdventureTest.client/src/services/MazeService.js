@@ -7,10 +7,10 @@ class MazeService {
 
   // NOTE DISTANCE FORMULA d = √[(x₂ - x₁)² + (y₂ - y₁)²],
 
-  move(location, destination) {
-    if (location.x == destination.x && location.y == destination.y) {
+  move(location, destination, id) {
+    if (location.x == destination.x && location.y == destination.y || AppState.deadCells.includes(id)) {
       clearInterval(int)
-      return logger.log("Already here")
+      return logger.log("Does not move")
     }
     clearInterval(int)
     int = null
@@ -31,10 +31,18 @@ class MazeService {
       for (let i = 0; i < nearby.length; i++) {
         let thisX = Math.pow((nearby[i].x - destination.x), 2)
         let thisY = Math.pow((nearby[i].y - destination.y), 2)
+        // for (let j = 0; j < AppState.deadCoords.length; j++) {
+        //   if(AppState.deadCoords[j].x == nearby[i].x && AppState.deadCoords[j].y == nearby[i].y)
+        //     nearby.splice(nearby[i], 1)
+        // }
         let thisD = Math.sqrt(thisX + thisY)
         if (thisD < nearestInt) {
           nearestInt = thisD
-          nearestCell = nearby[i]
+          if (nearby[i] != undefined) {
+            nearestCell = nearby[i]
+          } if(nearby[i] == undefined) {
+            i = -1
+          }
         }
       }
       AppState.location = nearestCell

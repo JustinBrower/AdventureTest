@@ -1,5 +1,5 @@
 <template>
-<div @click="move()" class="grid-item" :class="{home: location.x == coords.x && location.y == coords.y}" :id="coords">{{coords}}</div>
+<div @click="move()" class="grid-item" :class="{home: location.x == coords.x && location.y == coords.y, dead: isDead}" :id="coords">{{coords}}</div>
 </template>
 
 
@@ -24,7 +24,7 @@ export default {
         return {
             move(){
                 try {
-                    mazeService.move(this.location, this.coords)
+                    mazeService.move(this.location, this.coords, props.id)
                 } catch (error) {
                  logger.error(error)
                  Pop.toast(error.message, 'error')
@@ -33,10 +33,13 @@ export default {
             coords: computed(() => {
               let coords = {}
              coords = mazeService.setCoordinates(props.id)
-             AppState.coords = coords
+             if(AppState.deadCells.includes(props.id)){
+               AppState.deadCoords.push(coords)
+             }
              return coords
               } ),
-              location: computed(() => AppState.location)
+           location: computed(() => AppState.location),
+           isDead: computed(() => AppState.deadCells.includes(props.id))
         }
     }
 }
@@ -53,7 +56,11 @@ export default {
   height: 85px;
 }
 .home{
-    background-color: green;
-    color: green;
+  background-color: green;
+  color: green;
+}
+.dead{
+  background-color: rgb(87, 56, 9);
+  color: rgb(87, 56, 9);
 }
 </style>

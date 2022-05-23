@@ -12,5 +12,6 @@ export const AppState = reactive({
   strikes: 0,
   help: '',
   state: 0,
-  location: 45,
+  location: {x: 5, y: '3'},
+  coords: {}
 })

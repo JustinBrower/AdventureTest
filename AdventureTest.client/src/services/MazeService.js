@@ -1,4 +1,5 @@
 import { AppState } from "../AppState"
+import { logger } from "../utils/Logger"
 
 let int = null
 class MazeService {
@@ -6,7 +7,7 @@ class MazeService {
 
     // FIXME THIS IS REALLY CLOSE TO WORKING
 
-    move(location, destination) {
+  move(location, destination) {
         clearInterval(int)
         int = null
         int = setInterval(() => {
@@ -34,7 +35,31 @@ class MazeService {
 
         },
             1000)
+  }
+  setCoordinates(id){
+  let x = 0
+  let y = 0
+  let coords = {}
+    id = id.toString().split('')
+  if(id.length == 2){
+    x = Math.floor(id[1])
+    y = Math.floor(id[0]) + 1
+    if (x == 0) {
+      x = 10
+      y = Math.floor(id[0])
     }
+  }
+    if (id.length == 1) {
+      x = Math.floor(id[0])
+      y = 1
+  }
+    coords = { 'x': x, 'y': y }
+  return coords
+}
+
+
+
+
 }
 
 export const mazeService = new MazeService()

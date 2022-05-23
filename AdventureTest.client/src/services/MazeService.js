@@ -5,37 +5,54 @@ let int = null
 class MazeService {
 
 
-    // FIXME THIS IS REALLY CLOSE TO WORKING
+  // FIXME JUST NEED TO CLEAR THE INT
+  // NOTE DISTANCE FORMULA d = √[(x₂ - x₁)² + (y₂ - y₁)²],
 
   move(location, destination) {
-        clearInterval(int)
-        int = null
-        int = setInterval(() => {
-            let nearbyCells = [location - 1, location + 1, location + 10, location - 10, location - 9, location + 9, location - 11, location + 11]
-            let nearest = 3000
-            let path = Math.abs(location - destination)
-            let nearestCell = null
-            for (let i = 0; i < nearbyCells.length; i++) {
-                let newPath = Math.abs(destination - nearbyCells[i])
-                if (newPath < nearest) {
-                    nearest = newPath
-                    nearestCell = nearbyCells[i]
-                }
-            }
-            console.log("The nearest cell is", nearestCell)
-            AppState.location = nearestCell
-            if (location != destination) {
-                this.move(AppState.location, destination)
-            }
-            if (location == destination) {
-                console.log("Done!", destination, location)
-                clearInterval(int)
+    if (location.x == destination.x && location.y == destination.y) {
+      return logger.log("Already here")
+    }
+    let x = Math.pow((location.x - destination.x), 2)
+    let y = Math.pow((location.y - destination.y), 2)
+    let d = Math.sqrt(x + y)
 
-            }
 
-        },
-            1000)
+    clearInterval(int)
+    int = null
+    int = setInterval(() => {
+      logger.log(location, destination)
+      let nearestInt = 50
+      let nearestCell = {}
+      let nearby = [
+        { 'x': location.x - 1, 'y': location.y - 1 },
+        { 'x': location.x - 1, 'y': location.y + 1 },
+        { 'x': location.x - 1, 'y': location.y },
+        { 'x': location.x + 1, 'y': location.y - 1 },
+        { 'x': location.x + 1, 'y': location.y + 1 },
+        { 'x': location.x + 1, 'y': location.y },
+        { 'x': location.x, 'y': location.y + 1 },
+        { 'x': location.x, 'y': location.y - 1},
+      ]
+      for (let i = 0; i < nearby.length; i++) {
+
+    let thisX = Math.pow((nearby[i].x - destination.x), 2)
+    let thisY = Math.pow((nearby[i].y - destination.y), 2)
+        let thisD = Math.sqrt(thisX + thisY)
+        if (thisD < nearestInt) {
+          nearestInt = thisD
+          nearestCell = nearby[i]
+        }
+      }
+      AppState.location = nearestCell
+      if (nearestCell != destination) {
+        this.move(nearestCell, destination)
+      }
+    }
+    ,1000)
+    // clearInterval(int)
   }
+
+
   setCoordinates(id){
   let x = 0
   let y = 0

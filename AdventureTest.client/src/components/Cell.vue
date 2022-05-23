@@ -1,5 +1,5 @@
 <template>
-<div @click="move()" class="grid-item" :class="{home: location === coords}" :id="coords">{{coords}}</div>
+<div @click="move()" class="grid-item" :class="{home: location.x == coords.x && location.y == coords.y}" :id="coords">{{coords}}</div>
 </template>
 
 
@@ -19,27 +19,24 @@ export default {
     },
     setup(props){
       onMounted(() => {
-        try {
-        } catch (error) {
-         logger.error(error)
-         Pop.toast(error.message, 'error')
-        }
+        logger.log(AppState.location)
       })
         return {
             move(){
                 try {
-                    mazeService.move(AppState.location, this.coords)
+                    mazeService.move(this.location, this.coords)
                 } catch (error) {
                  logger.error(error)
                  Pop.toast(error.message, 'error')
                 }
             },
-            location: computed(() => AppState.location),
             coords: computed(() => {
               let coords = {}
              coords = mazeService.setCoordinates(props.id)
+             AppState.coords = coords
              return coords
-              } )
+              } ),
+              location: computed(() => AppState.location)
         }
     }
 }

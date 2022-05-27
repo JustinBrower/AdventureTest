@@ -1,5 +1,14 @@
 <template>
-<div @click="move()" class="grid-item" :class="{home: location.x == coords.x && location.y == coords.y, dead: isDead}" :id="coords">{{coords}}</div>
+<div
+@click="move()"
+class="grid-item"
+:id="coords"
+:class="{
+  home: location.x == coords.x && location.y == coords.y,
+  dead: isDead
+  }"
+>
+{{coords}}</div>
 </template>
 
 
@@ -19,7 +28,6 @@ export default {
     },
     setup(props){
       onMounted(() => {
-        logger.log(AppState.location)
       })
         return {
             move(){
@@ -35,6 +43,7 @@ export default {
              coords = mazeService.setCoordinates(props.id)
              if(AppState.deadCells.includes(props.id)){
                AppState.deadCoords.push(coords)
+               logger.log("dead coords", AppState.deadCoords)
              }
              return coords
               } ),

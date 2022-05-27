@@ -27,22 +27,22 @@ class MazeService {
         { 'x': location.x, 'y': location.y + 1 },
         { 'x': location.x, 'y': location.y - 1},
       ]
+      for (let j = 0; j < nearby.length; j++) {
+        for (let k = 0; k < AppState.deadCoords.length; k++){
+          if (AppState.deadCoords[k].x == nearby[j]?.x && AppState.deadCoords[k].y == nearby[j].y) {
+            nearby.splice(j, 1)
+          }
+        }
+      }
 
       for (let i = 0; i < nearby.length; i++) {
         let thisX = Math.pow((nearby[i].x - destination.x), 2)
         let thisY = Math.pow((nearby[i].y - destination.y), 2)
-        // for (let j = 0; j < AppState.deadCoords.length; j++) {
-        //   if(AppState.deadCoords[j].x == nearby[i].x && AppState.deadCoords[j].y == nearby[i].y)
-        //     nearby.splice(nearby[i], 1)
-        // }
+
         let thisD = Math.sqrt(thisX + thisY)
         if (thisD < nearestInt) {
           nearestInt = thisD
-          if (nearby[i] != undefined) {
-            nearestCell = nearby[i]
-          } if(nearby[i] == undefined) {
-            i = -1
-          }
+          nearestCell = nearby[i]
         }
       }
       AppState.location = nearestCell

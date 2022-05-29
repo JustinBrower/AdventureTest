@@ -15,9 +15,9 @@ class TextService {
                 let char = copy.shift()
                 if (char) {
                     if (char == ' ') {
-                        document.getElementById('text').innerText += ' '
+                      document.getElementById('text').innerText += ' '
                     } else {
-                        document.getElementById('text').innerText += char
+                      document.getElementById('text').innerText += char
                     }
                 }
             }

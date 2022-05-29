@@ -212,7 +212,7 @@ export default {
             state: computed(() => AppState.state)
         };
     },
-    components: { Grid }
+    // components: { Grid }
 }
 </script>
 
@@ -254,6 +254,11 @@ export default {
   word-wrap: break-word;
   word-break: break-all;
   overflow-wrap: break-word;
+  flex-wrap: wrap;
+  word-wrap: break-word;
+  flex-wrap: inherit;
+  word-wrap: normal;
+  word-wrap: initial;
 }
 .hidden {
   display: none;

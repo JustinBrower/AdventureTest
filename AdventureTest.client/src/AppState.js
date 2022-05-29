@@ -13,6 +13,6 @@ export const AppState = reactive({
   help: '',
   state: 0,
   location: { 'x': 5, 'y': 3 },
-  deadCells: [1,4,26,63,34,12,23,54,5,27,11,55,32,35],
+  deadCells: [1,2,3,4,5,6,7,8,9,10,32,34,75,77,54,45,35],
   deadCoords: []
 })

@@ -29,7 +29,7 @@ class MazeService {
       ]
       for (let j = 0; j < nearby.length; j++) {
         for (let k = 0; k < AppState.deadCoords.length; k++){
-          if (AppState.deadCoords[k].x == nearby[j]?.x && AppState.deadCoords[k].y == nearby[j].y) {
+          if (AppState.deadCoords[k].x == nearby[j].x && AppState.deadCoords[k].y == nearby[j].y) {
             nearby.splice(j, 1)
           }
         }
@@ -47,7 +47,7 @@ class MazeService {
       }
       AppState.location = nearestCell
       if (nearestCell.x != destination.x || nearestCell.y != destination.y) {
-        this.move(nearestCell, destination)
+        this.move(nearestCell, destination, id)
       } else {
         clearInterval(int)
       }

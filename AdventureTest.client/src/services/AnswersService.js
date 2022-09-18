@@ -23,7 +23,7 @@ class AnswersService {
         AppState.activeAnswer = null
     }
 
-    rando(state) {
+    randomizeAnswers(state) {
         let copy = Dialogue.messages[state].question
         let num = 0
         let doneCopy = done.filter(o => o.state == state)
@@ -54,7 +54,6 @@ class AnswersService {
         let index = AppState.answers.findIndex(a => a == AppState.correctAnswer)
         AppState.correctAnswer = index
     }
-
 }
 
 

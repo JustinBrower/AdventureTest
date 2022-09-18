@@ -23,7 +23,7 @@ export const Dialogue = {
         0: {
             question:
                 [
-                    "Which HTML tag you would use to get the BIGGEST header size you can?",
+                    "Which HTML tag would you use to get the BIGGEST header size you can?",
                     "Can you tell me which tag you'd use to get the SMALLEST header size?",
                     "What does HTML actually stand for?",
                     "Which tag is typically used to display text?",

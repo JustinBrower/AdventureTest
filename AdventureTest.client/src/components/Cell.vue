@@ -5,7 +5,8 @@ class="grid-item"
 :id="coords"
 :class="{
   home: location.x == coords.x && location.y == coords.y,
-  dead: isDead
+  dead: isDead,
+  door: isDoor
   }"
 >
 {{coords}}</div>
@@ -48,7 +49,8 @@ export default {
              return coords
               } ),
            location: computed(() => AppState.location),
-           isDead: computed(() => AppState.deadCells.includes(props.id))
+           isDead: computed(() => AppState.deadCells.includes(props.id)),
+           isDoor: computed(() => AppState.doors.includes(props.id))
         }
     }
 }
@@ -71,5 +73,9 @@ export default {
 .dead{
   background-color: rgb(87, 56, 9);
   color: rgb(87, 56, 9);
+}
+.door{
+  background-color: rgb(134, 134, 35);
+  color: rgb(134, 134, 35);
 }
 </style>

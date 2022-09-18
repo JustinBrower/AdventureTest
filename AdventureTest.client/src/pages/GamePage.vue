@@ -16,7 +16,7 @@
     >
       <strong class="wrap" id="text"></strong>
 
-      <strong id="answers" class="hidden">
+      <strong id="answers" v-show="gameState === gameStates[1]">
         <p
           :class="{ green: activeAnswer === 0 }"
           @click="setActive(0)"
@@ -51,23 +51,21 @@
         </p>
       </strong>
 
-      <button
-        class="btn btn-info hidden bottom-right"
-        id="next"
-        @click="sendGreeting"
-      >
+      <button class="btn btn-info bottom-right" id="next" @click="sendGreeting" v-show="gameState === gameStates[3]">
         Next
       </button>
       <button
-        class="btn btn-success hidden bottom-right"
+        class="btn btn-success bottom-right"
         id="nextQuestion"
+        v-show="gameState === gameStates[2]"
         @click="sendQuestion"
       >
         Next
       </button>
       <button
-        class="btn btn-success hidden bottom-right"
+        class="btn btn-success bottom-right"
         id="submit"
+        v-show="gameState === gameStates[0]"
         @click="submitAnswer"
       >
         Submit
@@ -78,7 +76,11 @@
         @click="reset"
       ></button>
       <a :href="help" target="_blank">
-        <button class="btn btn-danger hidden bottom-right-help" id="help">
+        <button
+          class="btn btn-danger bottom-right-help"
+          id="help"
+          v-show="gameState === gameStates[0]"
+        >
           Help!
         </button>
       </a>
@@ -95,20 +97,20 @@ import { onMounted, watchEffect } from "@vue/runtime-core";
 import { logger } from "../utils/Logger";
 import Pop from "../utils/Pop";
 import { textService } from "../services/TextService";
-import Grid from "../components/Grid.vue";
 export default {
   setup() {
     let introOrder = 0;
     let qOrder = 0;
     let state = 0;
     let q = 0;
+    AppState.gameState = AppState.gameStates[1];
     onMounted(() => {
       try {
         document.getElementById("next").classList.remove("hidden");
         document
           .getElementById("answers", "submit", "help", "nextQuestion")
           .classList.add("hidden");
-        q = answersService.rando(0);
+        q = answersService.randomizeAnswers(0);
         textService.displayText(Dialogue.messages.intro[introOrder], 40);
       } catch (error) {
         logger.error(error);
@@ -154,7 +156,7 @@ export default {
             AppState.state++;
             qOrder = 0;
             state++;
-            q = answersService.rando(state);
+            q = answersService.randomizeAnswers(state);
             this.sendQuestion();
           }
         } catch (error) {
@@ -209,9 +211,10 @@ export default {
       answers: computed(() => AppState.answers),
       help: computed(() => AppState.help),
       state: computed(() => AppState.state),
+      gameStates: computed(() => AppState.gameStates),
+      gameState: computed(() => AppState.gameState),
     };
   },
-  // components: { Grid }
 };
 </script>
 

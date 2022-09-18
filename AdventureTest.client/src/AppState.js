@@ -5,6 +5,8 @@ export const AppState = reactive({
   user: {},
   account: {},
   music: false,
+  gameStates: ["waiting", "typing", "transition", "introduction"],
+  gameState: "",
   game: 0,
   activeAnswer: null,
   answers: [],

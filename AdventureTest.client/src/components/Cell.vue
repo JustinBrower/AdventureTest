@@ -7,7 +7,7 @@ class="grid-item"
   home: location.x == coords.x && location.y == coords.y,
   dead: isDead,
   door: isDoor
-  }"
+}"
 >
 {{coords}}</div>
 </template>
@@ -21,7 +21,7 @@ import { logger } from '../utils/Logger'
 import Pop from '../utils/Pop'
 import { onMounted } from '@vue/runtime-core'
 export default {
-    props:{
+    props: {
         id: {
             typeof: Number,
             required: true,
@@ -31,23 +31,23 @@ export default {
       onMounted(() => {
       })
         return {
-            move(){
+            move() {
                 try {
-                    mazeService.move(this.location, this.coords, props.id)
+                    mazeService.move(this.location, this.coords, props.id);
                 } catch (error) {
-                 logger.error(error)
-                 Pop.toast(error.message, 'error')
+                 logger.error(error);
+                 Pop.toast(error.message, 'error');
                 }
             },
             coords: computed(() => {
-              let coords = {}
-             coords = mazeService.setCoordinates(props.id)
-             if(AppState.deadCells.includes(props.id)){
-               AppState.deadCoords.push(coords)
-               logger.log("dead coords", AppState.deadCoords)
+              let coords = {};
+             coords = mazeService.setCoordinates(props.id);
+             if (AppState.deadCells.includes(props.id)) {
+               AppState.deadCoords.push(coords);
+               logger.log("dead coords", AppState.deadCoords);
              }
-             return coords
-              } ),
+             return coords;
+        }),
            location: computed(() => AppState.location),
            isDead: computed(() => AppState.deadCells.includes(props.id)),
            isDoor: computed(() => AppState.doors.includes(props.id))

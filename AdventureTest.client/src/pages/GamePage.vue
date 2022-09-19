@@ -51,7 +51,12 @@
         </p>
       </strong>
 
-      <button class="btn btn-info bottom-right" id="next" @click="sendGreeting" v-show="gameState === gameStates[3]">
+      <button
+        class="btn btn-info bottom-right"
+        id="next"
+        @click="sendGreeting"
+        v-show="gameState === gameStates[3]"
+      >
         Next
       </button>
       <button
@@ -103,13 +108,9 @@ export default {
     let qOrder = 0;
     let state = 0;
     let q = 0;
-    AppState.gameState = AppState.gameStates[1];
     onMounted(() => {
+      AppState.gameState = AppState.gameStates[1];
       try {
-        document.getElementById("next").classList.remove("hidden");
-        document
-          .getElementById("answers", "submit", "help", "nextQuestion")
-          .classList.add("hidden");
         q = answersService.randomizeAnswers(0);
         textService.displayText(Dialogue.messages.intro[introOrder], 40);
       } catch (error) {
